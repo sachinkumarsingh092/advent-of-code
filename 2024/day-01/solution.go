@@ -47,6 +47,21 @@ func getDistance(col1, col2 []int) int {
 	return ans
 }
 
+func getSimilarityScore(col1, col2 []int) int {
+	frequencyMapCol2 := make(map[int]int)
+
+	for _, val := range col2 {
+		frequencyMapCol2[val]++
+	}
+
+	ans := 0
+	for _, val := range col1 {
+		ans += val * frequencyMapCol2[val]
+	}
+
+	return ans
+}
+
 func main() {
 	col1, col2, err := readInput("input.txt")
 	if err != nil {
@@ -54,4 +69,5 @@ func main() {
 	}
 
 	fmt.Println(getDistance(col1, col2))
+	fmt.Println(getSimilarityScore(col1, col2))
 }
